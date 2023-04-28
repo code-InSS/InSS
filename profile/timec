@@ -1,0 +1,29 @@
+#!/bin/bash
+#source ./paramter
+# resnet50 arcface yolov3 efflite
+sep=1
+RES_DIR=$PWD/../resource/ # beware! '/' at the end is required!
+BUILD_DIR=$PWD/../bin/
+task=$1
+req=100
+batch=4
+mean=100
+
+if true
+then
+int=$sep
+while(( $int<=5 ))
+do
+    i=1
+    while(( $i<=$int ))
+    do
+        $BUILD_DIR/standalone_inference --task $task --taskfile $RES_DIR/models/$task.pt --requests $req \
+            --batch $batch --mean $mean --input $RES_DIR/$input_tx --input_config_json $RES_DIR/input_config.json  &
+        let i+=1
+    done
+    wait
+    #nsys profile -t cuda -s none --export=sqlite --force-overwrite=true -o data/v100_yolv3_t$int ./conperf 1
+    #python3 sepper.py data/v100_yolv3_t$int.sqlite 151
+    let int+=$sep
+done
+fi

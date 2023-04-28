@@ -1,0 +1,12 @@
+python 3.9
+cuda 11.3
+numpy-1.24.2
+pycuda-2020.1
+cuDNN 8.2.1
+pytorch==1.12.1
+
+cmake 3.25.2
+libtorch 1.10
+opencv 4.0.0
+boost 1.66
+

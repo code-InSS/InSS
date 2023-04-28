@@ -1,0 +1,19 @@
+#!/bin/bash
+
+RES_DIR=$PWD/../resource/ # beware! '/' at the end is required!
+BUILD_DIR=$PWD/../bin/
+req=100
+batch=$3
+mean=100
+
+int=1
+task=$2
+while(($int<=$1))
+do
+    let int++
+     $BUILD_DIR/standalone_inference --task $task --taskfile $RES_DIR/models/$task.pt --requests $req \
+            --batch $batch --mean $mean --input $RES_DIR/$input_tx --input_config_json $RES_DIR/input_config.json   &
+    #sleep 1
+   # python3 onnx_to_tensorrt.py &
+done
+wait
